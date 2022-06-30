@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import Button from "./components/Button";
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+      <Button />
+    </div>
+  );
+};
 
-export default App
+export default App;
