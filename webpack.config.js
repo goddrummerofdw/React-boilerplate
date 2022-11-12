@@ -1,5 +1,5 @@
 const path = require("path");
-
+const openBrowser = require("react-dev-utils/openBrowser");
 module.exports = {
   mode: "development",
   entry: "./index.js",
@@ -7,14 +7,18 @@ module.exports = {
     path: path.resolve(__dirname, "public"),
     filename: "main.js",
   },
-
   target: "web",
   devServer: {
     port: "3000",
     static: ["./public"],
-    open: true,
-    hot: true,
-    liveReload: true,
+    hot: false,
+    onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error("webpack-dev-server is not defined");
+      }
+      const addr = devServer.server.address();
+      openBrowser(`http://localhost:${addr.port}`);
+    },
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx", ".css"],
